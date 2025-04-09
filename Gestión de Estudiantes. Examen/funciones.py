@@ -1,42 +1,30 @@
-lista_estudiante = []
-calificaciones = []
-
-
 def mostrar_menu():
-    print("*-"*40, "MENÚ", "*-"*40)
-    print("1. Registrar nuevo estudiante. ")
+    print("\n" + "-" * 20 + " MENÚ " + "-" * 20)
+    print("1. Registrar nuevo estudiante.")
     print("2. Agregar calificación a un estudiante.")
-    print("3. Mostrar información de un estudiante. ")
-    print("4. Mostrar todos lo estudiantes. ")
-    print("5. Salir del programa. ")
-    op = int(input("Opción: "))
-    
-    match op:
-        case 1:
-            nombre = input("Nombre: ")
-            edad = int(input("Edad: "))
-            carrera = input("Carrera: ")
+    print("3. Mostrar información de un estudiante.")
+    print("4. Mostrar todos los estudiantes.")
+    print("5. Salir del programa.")
+    print("-"*20, "-"*20)
+    opcion = input("Opción: ")
+    return opcion
 
-        case 2: 
-            nombre = input("Nombre: ")
-            for c in calificaciones: 
-                c = int(input(f"Nota{c+1}: "))
-                calificaciones.append(c)
 
-            
-
-def validar_datos(edad):
-     while edad < 0: 
-            if(edad>0):
-                edad = input("Ingrese la edad: ")
-                break
+def validar_edad(entrada):
+    while True:
+        try:
+            edad = int(entrada)  #verifica que la conversion a entero se pueda
+            if edad > 0: #verifica que sea mayor que 0 
+                return edad
             else:
-                print("Edad inválida. ")
+                print("La edad debe ser un número positivo.")
+        except ValueError:  #en caso que no se pueda convertir a entero, se vuelve a pedir el valor
+            print("Ingrese un número válido.")
+        entrada = input("Edad: ")
 
-def buscar_estudiante(nombre):
-    for i in lista_estudiante:
-        if(i == nombre):
-            print("Alumno encontrado.")
-            
-        else:
-            print("No se encontró. ")
+
+def buscar_estudiante(lista, nombre):
+    for est in lista:
+        if est.nombre.lower() == nombre.lower():  #se utiliza la funcion . lower para encontrar el nombre, independientemente qu esea en inuscula o mayuscula
+            return est
+    return None
